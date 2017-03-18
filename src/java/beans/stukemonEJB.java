@@ -95,5 +95,8 @@ public class stukemonEJB {
     public Pokemon encontrarPokemon(String nombre) {
         return (Pokemon) emf.createEntityManager().createNamedQuery("Pokemon.findByName").setParameter("name", nombre).getSingleResult();
     }
+    public List<Pokemon> seleccionarTodosPokemon() {
+        return emf.createEntityManager().createNamedQuery("Pokemon.findAll").getResultList();
+    }
     //ej4
 }
