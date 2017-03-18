@@ -48,18 +48,12 @@ public class BorrarPokemon extends HttpServlet {
             out.println("<body>");
             String nombre = request.getParameter("nombre");
             Pokemon p = new Pokemon(nombre);
-            if (ejb.existePokemon(p)) {
-
-                if (ejb.borrarPokemon(nombre)) {
-
-                    out.println("<h1>Pokemon borrado</h1>");
-                } else {
-
-                    out.println("<h1>:/</h1>");
-                }
+            if (ejb.borrarPokemon(nombre)) {
+                out.println("<h1>Pokemon borrado</h1>");
             } else {
-                out.println("<h1>No existe</h1>");
+                out.println(":/");
             }
+            out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
         }

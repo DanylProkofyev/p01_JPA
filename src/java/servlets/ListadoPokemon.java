@@ -23,8 +23,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ListadoPokemon", urlPatterns = {"/ListadoPokemon"})
 public class ListadoPokemon extends HttpServlet {
+
     @EJB
     stukemonEJB ejb;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,18 +44,19 @@ public class ListadoPokemon extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ListadoPokemon</title>");            
+            out.println("<title>Servlet ListadoPokemon</title>");
             out.println("</head>");
             out.println("<body>");
             List<Pokemon> todoPokemon = ejb.seleccionarTodosPokemon();
             for (Pokemon PokemonAhora : todoPokemon) {
                 out.println("<form action=\"BorrarPokemon\" method=\"GET\">");
-                out.println("<div><label>" + PokemonAhora.getName() + ", Nivel: "+PokemonAhora.getLevel()+"</label></div>");
+                out.println("<div><label>" + PokemonAhora.getName() + ", Nivel: " + PokemonAhora.getLevel() + "</label></div>");
                 out.println("<div><label>" + PokemonAhora.getTrainer().getName() + "</label></div>");
                 out.println("<div><input type=\"submit\" value=\"Delete\">");
                 out.println("<input type=\"hidden\"name=\"nombre\" value=\"" + PokemonAhora.getName() + "\"></div>");
                 out.println("</form>");
             }
+            out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
         }
