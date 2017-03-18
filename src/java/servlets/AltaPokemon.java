@@ -44,35 +44,34 @@ public class AltaPokemon extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"icon\" \n"
+                    + "              type=\"image/png\" \n"
+                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("<title>Servlet AltaPokemon</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<form action=\"PokemonFuncion\" method=\"GET\">");
-            out.println("<label>nombre</label>");
+            out.println("<p><label>nombre</label></p>");
             out.println("<input type=\"text\" name=\"nombre\">");
-            out.println("<label>tipo</label>");
+            out.println("<p><label>tipo</label></p>");
             out.println("<input type=\"text\"  name=\"tipo\">");
-            out.println("<label>habilidad</label>");
+            out.println("<p><label>habilidad</label></p>");
             out.println("<input type=\"text\"  name=\"habilidad\">");
-            out.println("<label>ataque</label>");
+            out.println("<p><label>ataque</label></p>");
             out.println("<input type=\"number\" name=\"ataque\">");
-            out.println("<label>defensa</label>");
+            out.println("<p><label>defensa</label></p>");
             out.println("<input type=\"number\" name=\"defensa\">");
-            out.println("<label>velocidad</label>");
+            out.println("<p><label>velocidad</label></p>");
             out.println("<input type=\"number\" name=\"velocidad\">");
-            out.println("<label>vida</label>");
+            out.println("<p><label>vida</label></p>");
             out.println("<input type=\"number\" name=\"vida\">");
-            out.println("<label>entrenador</label>");
+            out.println("<p><label>entrenador</label></p>");
             out.println("<select name=\"entrenador\">");
             try {
-
                 List<Trainer> todosEntrenadores = ejb.seleccionaEntrenadoresFaltosPokemon();
-
                 for (Trainer entrenadorAhora : todosEntrenadores) {
-
                     out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + "</option>");
                 }
-
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -9,6 +9,7 @@ import beans.stukemonEJB;
 import entities.Trainer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author x6095888z
+ * @author dergenburn
  */
-@WebServlet(name = "AltaEntrenador", urlPatterns = {"/AltaEntrenador"})
-public class AltaEntrenador extends HttpServlet {
+@WebServlet(name = "RankingEntrenadores", urlPatterns = {"/RankingEntrenadores"})
+public class RankingEntrenadores extends HttpServlet {
 
     @EJB
     stukemonEJB ejb;
@@ -37,27 +38,32 @@ public class AltaEntrenador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String nombre = request.getParameter("nombre");
-        int pokeballs = Integer.parseInt(request.getParameter("pokeballs"));
-        int pociones = Integer.parseInt(request.getParameter("pociones"));
-        Trainer t = new Trainer(nombre, pokeballs, pociones, 0);
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"icon\" \n"
-                    + "              type=\"image/png\" \n"
-                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
-            out.println("<title>Servlet AltaEntrenador</title>");
+            out.println("<link rel=\"icon\" \n" +
+"              type=\"image/png\" \n" +
+"              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
+            out.println("<title>Servlet RankingEntrenadores</title>");
+            out.println("<style>td{border-style: solid;\n"
+                    + "    border-width: 1px 1px 1px 1px;}"
+                    + "th, table *:first-child{border-style: solid;\n"
+                    + "    border-width: 2px 2px 2px 2px;}</style>");
             out.println("</head>");
             out.println("<body>");
-            if (ejb.insertarEntrenador(t)) {
-                out.println("<div>Entrenador dado de alta</div>");
-            } else {
-                out.println("<div>Entrenador ya existe</div>");
+            out.println("<table>");
+            out.println("<th>Nombre</th><th>Pokeballs</th><th>Pociones</th><th>Puntos</th>");
+            List<Trainer> todoEntrenadores = ejb.seleccionarTodosEntrenadores();
+            for (Trainer entrenadorAhora : todoEntrenadores) {
+                out.println("<tr>");
+                out.println(entrenadorAhora.toString());
+                out.println("</tr>");
             }
+            out.println("</table>");
+            out.println("</br>");
             out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");

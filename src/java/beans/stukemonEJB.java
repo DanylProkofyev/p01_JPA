@@ -78,7 +78,7 @@ public class stukemonEJB {
         return entrena;
     }
 
-    //ej3
+    //ej3/7
     public boolean borrarPokemon(String nombre) {
         Pokemon p = encontrarPokemon(nombre);
         EntityManager em = emf.createEntityManager();
@@ -97,7 +97,10 @@ public class stukemonEJB {
     }
 
     public List<Pokemon> seleccionarTodosPokemon() {
-        return emf.createEntityManager().createNamedQuery("Pokemon.findAll").getResultList();
+        return emf.createEntityManager().createNamedQuery("Pokemon.findAllOrder").getResultList();
     }
-    //ej4
+    //ej8
+    public List<Trainer> seleccionarTodosEntrenadores() {
+        return emf.createEntityManager().createNamedQuery("Trainer.findAllOrder").getResultList();
+    }
 }

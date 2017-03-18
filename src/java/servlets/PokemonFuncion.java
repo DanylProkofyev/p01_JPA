@@ -45,6 +45,9 @@ public class PokemonFuncion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"icon\" \n"
+                    + "              type=\"image/png\" \n"
+                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("<title>Servlet PokemonFuncion</title>");
             out.println("</head>");
             out.println("<body>");
@@ -56,21 +59,21 @@ public class PokemonFuncion extends HttpServlet {
             Integer velocidad = Integer.parseInt(request.getParameter("velocidad"));
             Integer vida = Integer.parseInt(request.getParameter("vida"));
             String entrenador = request.getParameter("entrenador");
-            
+
             Pokemon p = new Pokemon(nombre, tipo, habilidad, ataque, defensa, velocidad, vida, 0);
             Trainer t = ejb.encontrarEntrenador(entrenador);
             p.setTrainer(t);
             if (!ejb.tieneSeisPokemon(t)) {
                 out.println("<h1>este entrenador ya tiene 6 pokemon</h1>");
-            }else{
+            } else {
                 if (ejb.insertPoke(p)) {
                     out.println("<h1>Nuevo pokemon creado</h1>");
                 } else {
                     out.println("<h1>No se ha podido crear el pokemon</h1>");
                 }
             }
+            out.println("<form action='AltaPokemon'><input type='submit' name='altaPokemon' value='Dar de alta a otro Pokemon'/></form>");
             out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
-            
             out.println("</body>");
             out.println("</html>");
         }

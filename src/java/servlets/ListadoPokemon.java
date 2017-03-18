@@ -44,14 +44,19 @@ public class ListadoPokemon extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"icon\" \n"
+                    + "              type=\"image/png\" \n"
+                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("<title>Servlet ListadoPokemon</title>");
             out.println("</head>");
             out.println("<body>");
             List<Pokemon> todoPokemon = ejb.seleccionarTodosPokemon();
             for (Pokemon PokemonAhora : todoPokemon) {
                 out.println("<form action=\"BorrarPokemon\" method=\"GET\">");
-                out.println("<div><label>" + PokemonAhora.getName() + ", Nivel: " + PokemonAhora.getLevel() + "</label></div>");
-                out.println("<div><label>" + PokemonAhora.getTrainer().getName() + "</label></div>");
+                out.println("<div><p><label><b>" + PokemonAhora.getName() + "</b>: Nivel " + PokemonAhora.getLevel() + " | Tipo: " + PokemonAhora.getType() + " | Habilidad: "
+                        + PokemonAhora.getAbility() + " | Ataque: " + PokemonAhora.getAttack() + " | Defensa: " + PokemonAhora.getDefense() + " | Velocidad: "
+                        + PokemonAhora.getSpeed() + " | Vida: " + PokemonAhora.getLife() + "</label></p></div>");
+                out.println("<div><p><label>Entrenador: " + PokemonAhora.getTrainer().getName() + "</label></p></div>");
                 out.println("<div><input type=\"submit\" value=\"Delete\">");
                 out.println("<input type=\"hidden\"name=\"nombre\" value=\"" + PokemonAhora.getName() + "\"></div>");
                 out.println("</form>");

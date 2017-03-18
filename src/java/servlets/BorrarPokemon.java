@@ -43,6 +43,9 @@ public class BorrarPokemon extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
+            out.println("<link rel=\"icon\" \n"
+                    + "              type=\"image/png\" \n"
+                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("<title>Servlet BorrarPokemon</title>");
             out.println("</head>");
             out.println("<body>");
