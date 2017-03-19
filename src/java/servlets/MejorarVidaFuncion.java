@@ -6,10 +6,10 @@
 package servlets;
 
 import beans.stukemonEJB;
+import entities.Pokemon;
 import entities.Trainer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dergenburn
  */
-@WebServlet(name = "ConseguirPociones", urlPatterns = {"/ConseguirPociones"})
-public class ConseguirPociones extends HttpServlet {
+@WebServlet(name = "MejorarVidaFuncion", urlPatterns = {"/MejorarVidaFuncion"})
+public class MejorarVidaFuncion extends HttpServlet {
 
     @EJB
     stukemonEJB ejb;
@@ -44,29 +44,19 @@ public class ConseguirPociones extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConseguirPociones</title>");
-            out.println("<link rel=\"icon\" \n"
-                    + "              type=\"image/png\" \n"
-                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
+            out.println("<title>Servlet MejorarVidaFuncion</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"ConseguirPocionesFuncion\">");
-            out.println("<label><h2>Entrenador</h2></label>");
-            out.println("<select name=\"entrenador\">");
-            try {
-                List<Trainer> todosEntrenadores = ejb.seleccionarTodosEntrenadores();
-                for (Trainer entrenadorAhora : todosEntrenadores) {
-                    out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + ": Puntos disponibles: " + entrenadorAhora.getPoints() + "</option>");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            Pokemon p = ejb.encontrarPokemon(request.getParameter("pokemon"));
+            Trainer t = ejb.encontrarEntrenador(p.getTrainer().getName());
+            if (t.getPotions() > 0) {
+                p.setLife(p.getLife() + 50);
+                ejb.actuPokemon(p);
+                out.println("<p>El pokemon " + p.getName() + " ha mejorado en 50 sus puntos de vida y ahora tiene " + p.getLife() + " puntos de vida</p>");
+                t.setPotions(t.getPotions() - 1);
+                ejb.actuEntrenador(t);
+                out.println("<p>has gastado una pocion te quedan " + t.getPotions() + "</p>");
             }
-            out.println("</select>");
-            out.println("<label><p><h2>Cantidad de pociones que quieres comprar</h2></p></label>");
-            out.println("<input type=\"number\" name=\"cantidadPociones\">");
-            out.println("<input type=\"submit\" value=\"ok\">");
-            out.println("</form>");
-            out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
         }

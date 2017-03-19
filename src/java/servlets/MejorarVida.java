@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dergenburn
  */
-@WebServlet(name = "ConseguirPociones", urlPatterns = {"/ConseguirPociones"})
-public class ConseguirPociones extends HttpServlet {
+@WebServlet(name = "MejorarVida", urlPatterns = {"/MejorarVida"})
+public class MejorarVida extends HttpServlet {
 
     @EJB
     stukemonEJB ejb;
@@ -44,26 +44,24 @@ public class ConseguirPociones extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConseguirPociones</title>");
+            out.println("<title>Servlet MejorarVida</title>");
             out.println("<link rel=\"icon\" \n"
                     + "              type=\"image/png\" \n"
                     + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"ConseguirPocionesFuncion\">");
+            out.println("<form action=\"MejorarVidaPokemon\">");
             out.println("<label><h2>Entrenador</h2></label>");
             out.println("<select name=\"entrenador\">");
             try {
-                List<Trainer> todosEntrenadores = ejb.seleccionarTodosEntrenadores();
+                List<Trainer> todosEntrenadores = ejb.entrenadorConPotis();
                 for (Trainer entrenadorAhora : todosEntrenadores) {
-                    out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + ": Puntos disponibles: " + entrenadorAhora.getPoints() + "</option>");
+                    out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + "</option>");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             out.println("</select>");
-            out.println("<label><p><h2>Cantidad de pociones que quieres comprar</h2></p></label>");
-            out.println("<input type=\"number\" name=\"cantidadPociones\">");
             out.println("<input type=\"submit\" value=\"ok\">");
             out.println("</form>");
             out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");

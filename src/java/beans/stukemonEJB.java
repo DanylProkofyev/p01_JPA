@@ -24,8 +24,8 @@ public class stukemonEJB {
 
     @PersistenceUnit
     EntityManagerFactory emf;
-//ej1
 
+//ej1
     public boolean insertarEntrenador(Trainer t) {
         if (!existeEntrenador(t)) {
             EntityManager em = emf.createEntityManager();
@@ -42,8 +42,8 @@ public class stukemonEJB {
         em.close();
         return entrenadorEncontrado != null;
     }
-//ej2
 
+//ej2
     public Trainer encontrarEntrenador(String entrenador) {
         return (Trainer) emf.createEntityManager().createNamedQuery("Trainer.findByName").setParameter("name", entrenador).getSingleResult();
     }
@@ -114,5 +114,25 @@ public class stukemonEJB {
 
     public List<Trainer> seleccionarTodosEntrenadores() {
         return emf.createEntityManager().createNamedQuery("Trainer.findAll").getResultList();
+    }
+
+    //5
+    public List<Trainer> entrenadorConPotis() {
+        List<Trainer> todos = emf.createEntityManager().createNamedQuery("Trainer.findAll").getResultList();
+        List<Trainer> entrena = new ArrayList<>();
+        todos.stream().filter((entrenadorAhora) -> (entrenadorAhora.getPokemonCollection().size() > 0 && entrenadorAhora.getPotions() > 0)).forEachOrdered((entrenadorAhora) -> {
+            entrena.add(entrenadorAhora);
+        });
+        return entrena;
+    }
+
+    public List<Pokemon> pokemonPorEntrenador(String name) {
+        Trainer t = encontrarEntrenador(name);
+        return emf.createEntityManager().createNamedQuery("Pokemon.findByTrainer").setParameter("trainer", t).getResultList();
+    }
+
+    public void actuPokemon(Pokemon p) {
+        EntityManager em = emf.createEntityManager();
+        em.merge(p);
     }
 }

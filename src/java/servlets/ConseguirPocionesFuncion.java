@@ -44,13 +44,16 @@ public class ConseguirPocionesFuncion extends HttpServlet {
             out.println("<html>");
             out.println("<head>");
             out.println("<title>Servlet ConseguirPocionesFuncion</title>");
+            out.println("<link rel=\"icon\" \n"
+                    + "              type=\"image/png\" \n"
+                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("</head>");
             out.println("<body>");
             Trainer t = ejb.encontrarEntrenador(request.getParameter("entrenador"));
             int cantidadPociones = Integer.parseInt(request.getParameter("cantidadPociones"));
             int coste = cantidadPociones * 10;
             if (t.getPoints() >= coste) {
-                out.println("<h2>Has comprado " + cantidadPociones + " pocione/s</h2>");
+                out.println("<h2>Has comprado " + cantidadPociones + " pocion/es</h2>");
                 t.setPoints(t.getPoints() - coste);
                 t.setPotions(t.getPotions() + cantidadPociones);
                 out.println("<h4>Tiene " + t.getPotions() + " pociones y " + t.getPoints() + " puntos</h4>");
@@ -58,7 +61,6 @@ public class ConseguirPocionesFuncion extends HttpServlet {
             } else {
                 out.println("<h2>No tienes suficientes puntos</h2>");
             }
-
             out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
