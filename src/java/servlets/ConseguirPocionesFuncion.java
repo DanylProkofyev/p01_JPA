@@ -9,7 +9,6 @@ import beans.stukemonEJB;
 import entities.Trainer;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author x6095888z
+ * @author dergenburn
  */
-@WebServlet(name = "AltaPokemon", urlPatterns = {"/AltaPokemon"})
-public class AltaPokemon extends HttpServlet {
+@WebServlet(name = "ConseguirPociones", urlPatterns = {"/ConseguirPociones"})
+public class ConseguirPocionesFuncion extends HttpServlet {
 
     @EJB
     stukemonEJB ejb;
@@ -44,40 +43,15 @@ public class AltaPokemon extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"icon\" \n"
-                    + "              type=\"image/png\" \n"
-                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
-            out.println("<title>Servlet AltaPokemon</title>");
+            out.println("<title>Servlet ConseguirPociones</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"PokemonFuncion\" method=\"GET\">");
-            out.println("<p><label>nombre</label></p>");
-            out.println("<input type=\"text\" name=\"nombre\">");
-            out.println("<p><label>tipo</label></p>");
-            out.println("<input type=\"text\"  name=\"tipo\">");
-            out.println("<p><label>habilidad</label></p>");
-            out.println("<input type=\"text\"  name=\"habilidad\">");
-            out.println("<p><label>ataque</label></p>");
-            out.println("<input type=\"number\" name=\"ataque\">");
-            out.println("<p><label>defensa</label></p>");
-            out.println("<input type=\"number\" name=\"defensa\">");
-            out.println("<p><label>velocidad</label></p>");
-            out.println("<input type=\"number\" name=\"velocidad\">");
-            out.println("<p><label>vida</label></p>");
-            out.println("<input type=\"number\" name=\"vida\">");
-            out.println("<p><label>entrenador</label></p>");
-            out.println("<select name=\"entrenador\">");
-            try {
-                List<Trainer> todosEntrenadores = ejb.seleccionEntrenadoresNo6Pokemon();
-                for (Trainer entrenadorAhora : todosEntrenadores) {
-                    out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + "</option>");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+            Trainer t = ejb.encontrarEntrenador(request.getParameter("entrenador"));
+            int cantidadPociones = Integer.parseInt(request.getParameter("cantidadPociones"));
+            int coste = cantidadPociones*10;
+            if(t.getPoints()>=coste){
+                t.setPoints(t.getPoints()-coste);
             }
-            out.println("</select>");
-            out.println("<input type=\"submit\" value=\"ok\">");
-            out.println("</form>");
             out.println("</body>");
             out.println("</html>");
         }

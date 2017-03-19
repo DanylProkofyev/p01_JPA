@@ -5,6 +5,7 @@
  */
 package beans;
 
+import entities.Battle;
 import entities.Pokemon;
 import entities.Trainer;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class stukemonEJB {
         return pokeEncontrado != null;
     }
 
-    public List<Trainer> seleccionaEntrenadoresFaltosPokemon() {
+    public List<Trainer> seleccionEntrenadoresNo6Pokemon() {
         List<Trainer> listaEntrenador = emf.createEntityManager().createNamedQuery("Trainer.findAll").getResultList();
         List<Trainer> entrena = new ArrayList<>();
         listaEntrenador.stream().filter((entrenadorAhora) -> (entrenadorAhora.getPokemonCollection().size() < 6)).forEachOrdered((entrenadorAhora) -> {
@@ -96,11 +97,22 @@ public class stukemonEJB {
         return (Pokemon) emf.createEntityManager().createNamedQuery("Pokemon.findByName").setParameter("name", nombre).getSingleResult();
     }
 
-    public List<Pokemon> seleccionarTodosPokemon() {
+    public List<Pokemon> seleccionarTodosPokemonOrden() {
         return emf.createEntityManager().createNamedQuery("Pokemon.findAllOrder").getResultList();
     }
+
     //ej8
-    public List<Trainer> seleccionarTodosEntrenadores() {
+    public List<Trainer> seleccionarTodosEntrenadoresOrden() {
         return emf.createEntityManager().createNamedQuery("Trainer.findAllOrder").getResultList();
+    }
+
+    //6
+    public void actuEntrenador(Trainer t) {
+        EntityManager em = emf.createEntityManager();
+        em.merge(t);
+    }
+
+    public List<Trainer> seleccionarTodosEntrenadores() {
+        return emf.createEntityManager().createNamedQuery("Trainer.findAll").getResultList();
     }
 }

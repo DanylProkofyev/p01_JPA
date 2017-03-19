@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author x6095888z
+ * @author dergenburn
  */
-@WebServlet(name = "AltaPokemon", urlPatterns = {"/AltaPokemon"})
-public class AltaPokemon extends HttpServlet {
+@WebServlet(name = "ConseguirPocion", urlPatterns = {"/ConseguirPocion"})
+public class ConseguirPociones extends HttpServlet {
 
     @EJB
     stukemonEJB ejb;
@@ -44,31 +44,14 @@ public class AltaPokemon extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"icon\" \n"
-                    + "              type=\"image/png\" \n"
-                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
-            out.println("<title>Servlet AltaPokemon</title>");
+            out.println("<title>Servlet ConseguirPocion</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<form action=\"PokemonFuncion\" method=\"GET\">");
-            out.println("<p><label>nombre</label></p>");
-            out.println("<input type=\"text\" name=\"nombre\">");
-            out.println("<p><label>tipo</label></p>");
-            out.println("<input type=\"text\"  name=\"tipo\">");
-            out.println("<p><label>habilidad</label></p>");
-            out.println("<input type=\"text\"  name=\"habilidad\">");
-            out.println("<p><label>ataque</label></p>");
-            out.println("<input type=\"number\" name=\"ataque\">");
-            out.println("<p><label>defensa</label></p>");
-            out.println("<input type=\"number\" name=\"defensa\">");
-            out.println("<p><label>velocidad</label></p>");
-            out.println("<input type=\"number\" name=\"velocidad\">");
-            out.println("<p><label>vida</label></p>");
-            out.println("<input type=\"number\" name=\"vida\">");
-            out.println("<p><label>entrenador</label></p>");
+            out.println("<form action=\"ConseguirPocionesFuncion\">");
+            out.println("<label><h2>Entrenador</h2></label>");
             out.println("<select name=\"entrenador\">");
             try {
-                List<Trainer> todosEntrenadores = ejb.seleccionEntrenadoresNo6Pokemon();
+                List<Trainer> todosEntrenadores = ejb.seleccionarTodosEntrenadores();
                 for (Trainer entrenadorAhora : todosEntrenadores) {
                     out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + "</option>");
                 }
@@ -76,7 +59,6 @@ public class AltaPokemon extends HttpServlet {
                 e.printStackTrace();
             }
             out.println("</select>");
-            out.println("<input type=\"submit\" value=\"ok\">");
             out.println("</form>");
             out.println("</body>");
             out.println("</html>");

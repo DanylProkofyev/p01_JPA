@@ -50,14 +50,14 @@ public class ListadoPokemon extends HttpServlet {
             out.println("<title>Servlet ListadoPokemon</title>");
             out.println("</head>");
             out.println("<body>");
-            List<Pokemon> todoPokemon = ejb.seleccionarTodosPokemon();
+            List<Pokemon> todoPokemon = ejb.seleccionarTodosPokemonOrden();
             for (Pokemon PokemonAhora : todoPokemon) {
                 out.println("<form action=\"BorrarPokemon\" method=\"GET\">");
                 out.println("<div><p><label><b>" + PokemonAhora.getName() + "</b>: Nivel " + PokemonAhora.getLevel() + " | Tipo: " + PokemonAhora.getType() + " | Habilidad: "
                         + PokemonAhora.getAbility() + " | Ataque: " + PokemonAhora.getAttack() + " | Defensa: " + PokemonAhora.getDefense() + " | Velocidad: "
                         + PokemonAhora.getSpeed() + " | Vida: " + PokemonAhora.getLife() + "</label></p></div>");
                 out.println("<div><p><label>Entrenador: " + PokemonAhora.getTrainer().getName() + "</label></p></div>");
-                out.println("<div><input type=\"submit\" value=\"Delete\">");
+                out.println("<div><input type=\"submit\" value=\"Borrar\">");
                 out.println("<input type=\"hidden\"name=\"nombre\" value=\"" + PokemonAhora.getName() + "\"></div>");
                 out.println("</form>");
             }

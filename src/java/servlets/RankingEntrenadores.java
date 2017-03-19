@@ -44,9 +44,9 @@ public class RankingEntrenadores extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<link rel=\"icon\" \n" +
-"              type=\"image/png\" \n" +
-"              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
+            out.println("<link rel=\"icon\" \n"
+                    + "              type=\"image/png\" \n"
+                    + "              href=\"https://cdn1.iconfinder.com/data/icons/video-games-7/24/video_game_play_pokemon_pokeball-128.png\">");
             out.println("<title>Servlet RankingEntrenadores</title>");
             out.println("<style>td{border-style: solid;\n"
                     + "    border-width: 1px 1px 1px 1px;}"
@@ -56,10 +56,11 @@ public class RankingEntrenadores extends HttpServlet {
             out.println("<body>");
             out.println("<table>");
             out.println("<th>Nombre</th><th>Pokeballs</th><th>Pociones</th><th>Puntos</th>");
-            List<Trainer> todoEntrenadores = ejb.seleccionarTodosEntrenadores();
+            List<Trainer> todoEntrenadores = ejb.seleccionarTodosEntrenadoresOrden();
             for (Trainer entrenadorAhora : todoEntrenadores) {
                 out.println("<tr>");
                 out.println(entrenadorAhora.toString());
+                out.println("<td>" + entrenadorAhora.getPoints() + "</td>");
                 out.println("</tr>");
             }
             out.println("</table>");

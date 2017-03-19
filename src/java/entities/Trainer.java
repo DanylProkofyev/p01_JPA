@@ -136,7 +136,7 @@ public class Trainer implements Serializable {
     @Override
     public String toString() {
         return "<td> " + name + " </td><td> " + pokeballs + " </td><td> "
-                + potions + "</td><td>" + points + "</td>";
+                + potions + "</td>";
     }
 
 }
