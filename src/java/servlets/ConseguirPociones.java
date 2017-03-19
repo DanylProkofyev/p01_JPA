@@ -53,13 +53,17 @@ public class ConseguirPociones extends HttpServlet {
             try {
                 List<Trainer> todosEntrenadores = ejb.seleccionarTodosEntrenadores();
                 for (Trainer entrenadorAhora : todosEntrenadores) {
-                    out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + "</option>");
+                    out.println("<option value=" + entrenadorAhora.getName() + ">" + entrenadorAhora.getName() + ": Puntos disponibles: " + entrenadorAhora.getPoints() + "</option>");
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             out.println("</select>");
+            out.println("<label><p><h2>Cantidad de pociones que quieres comprar</h2></p></label>");
+            out.println("<input type=\"number\" name=\"cantidadPociones\">");
+            out.println("<input type=\"submit\" value=\"ok\">");
             out.println("</form>");
+            out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
         }

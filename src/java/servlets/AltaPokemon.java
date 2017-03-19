@@ -78,6 +78,7 @@ public class AltaPokemon extends HttpServlet {
             out.println("</select>");
             out.println("<input type=\"submit\" value=\"ok\">");
             out.println("</form>");
+            out.println("<form action='index.html'><input type='submit' name='volverInicio' value='Ir de vuelta a Inicio'/></form>");
             out.println("</body>");
             out.println("</html>");
         }
