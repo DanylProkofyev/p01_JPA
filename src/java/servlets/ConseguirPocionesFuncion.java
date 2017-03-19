@@ -54,6 +54,7 @@ public class ConseguirPocionesFuncion extends HttpServlet {
                 t.setPoints(t.getPoints() - coste);
                 t.setPotions(t.getPotions() + cantidadPociones);
                 out.println("<h4>Tiene " + t.getPotions() + " pociones y " + t.getPoints() + " puntos</h4>");
+                ejb.actuEntrenador(t);
             } else {
                 out.println("<h2>No tienes suficientes puntos</h2>");
             }
