@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dergenburn
  */
-@WebServlet(name = "ConseguirPociones", urlPatterns = {"/ConseguirPociones"})
+@WebServlet(name = "ConseguirPocionesFuncion", urlPatterns = {"/ConseguirPocionesFuncion"})
 public class ConseguirPocionesFuncion extends HttpServlet {
 
     @EJB
@@ -43,7 +43,7 @@ public class ConseguirPocionesFuncion extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConseguirPociones</title>");
+            out.println("<title>Servlet ConseguirPocionesFuncion</title>");
             out.println("</head>");
             out.println("<body>");
             Trainer t = ejb.encontrarEntrenador(request.getParameter("entrenador"));

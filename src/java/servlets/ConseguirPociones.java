@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dergenburn
  */
-@WebServlet(name = "ConseguirPocion", urlPatterns = {"/ConseguirPocion"})
+@WebServlet(name = "ConseguirPociones", urlPatterns = {"/ConseguirPociones"})
 public class ConseguirPociones extends HttpServlet {
 
     @EJB
@@ -44,7 +44,7 @@ public class ConseguirPociones extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConseguirPocion</title>");
+            out.println("<title>Servlet ConseguirPociones</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<form action=\"ConseguirPocionesFuncion\">");
